@@ -1,8 +1,6 @@
 let numbers = []
 let operators = []
 
-TEMP();
-
 function operate (first, second, operator){
     switch (true){
         case (operator === "+"):
