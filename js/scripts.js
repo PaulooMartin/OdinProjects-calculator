@@ -1,6 +1,7 @@
 let numbers = [];
 let operators = [];
 
+const displayScreen = document.querySelector(".display-screen");
 const digitBtns = document.querySelectorAll(".number");
 numListener(digitBtns);
 
@@ -42,6 +43,7 @@ function divide(x, y) {
 function numListener(numNodeList) {
   numNodeList.forEach((numBtn) => {
     numBtn.addEventListener("click", () => {
+      displayScreen.textContent = numBtn.attributes["data-digit"].value;
       console.log(numBtn.attributes["data-digit"].value);
     });
   });
