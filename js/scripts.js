@@ -1,6 +1,9 @@
 let numbers = []
 let operators = []
 
+const digitBtns = document.querySelectorAll(".number");
+numListener(digitBtns);
+
 function operate (first, second, operator){
     switch (true){
         case (operator === "+"):
@@ -36,6 +39,13 @@ function divide (x,y){
     return x / y;
 }
 
+function numListener (numNodeList){
+    numNodeList.forEach(numBtn => {
+        numBtn.addEventListener('click', () => {
+        console.log(numBtn.attributes["data-digit"].value)
+    })
+})
+}
 // Simulates a calculator that is able to do multiple operations with multiple numbers
 // Inputs only taken from prompt()s, outputs result to the console
 // No checksum for invalid inputs
