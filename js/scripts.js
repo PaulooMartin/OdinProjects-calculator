@@ -1,24 +1,21 @@
-let numberA = +prompt("Enter a number:")
-let numberB = +prompt("Enter a second number:")
-let operator = prompt("What do you want to do with these?", "add/subtract/multiply/divide")
+let numbers = []
+let operators = []
+
+TEMP();
 
 function operate (first, second, operator){
     switch (true){
-        case (operator === "add"):
-            alert(`Result is ${add(first,second)}`)
-            break;
+        case (operator === "+"):
+            return add(first,second)
 
-        case (operator === "subtract"):
-            alert(`Result is ${subtract(first,second)}`)
-            break;
+        case (operator === "-"):
+            return subtract(first,second)
 
-        case (operator === "multiply"):
-            alert(`Result is ${multiply(first,second)}`)
-            break;
+        case (operator === "*"):
+            return multiply(first,second)
 
-        case (operator === "divide"):
-            alert(`Result is ${divide(first,second)}`)
-            break;
+        case (operator === "/"):
+            return divide(first,second)
 
         default:
             console.log("Something went wrong, operate()")
@@ -39,4 +36,22 @@ function multiply (x,y){
 
 function divide (x,y){
     return x / y;
+}
+
+// Simulates a calculator that is able to do multiple operations with multiple numbers
+// Inputs only taken from prompt()s, outputs result to the console
+// No checksum for invalid inputs
+function TEMP(){
+    do{
+    numbers.push(+prompt("Enter a number:"));
+    operators.push(prompt("Enter an operator: ", "Enter '=' if you are finished."));
+    } while (operators[operators.length - 1] != "=")
+
+    let finalResult = numbers.reduce((result, currentNumber, currentIndex) => operate(result, currentNumber, operators[currentIndex-1])
+    );
+
+    numbers = [];
+    operators = [];
+
+    console.log(finalResult)
 }
