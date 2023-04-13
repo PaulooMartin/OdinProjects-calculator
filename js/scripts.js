@@ -3,7 +3,10 @@ let operators = [];
 
 const displayScreen = document.querySelector(".display-screen");
 const digitBtns = document.querySelectorAll(".number");
+const operatorBtns = document.querySelectorAll(".operator")
+
 numListener(digitBtns);
+oprListener(operatorBtns);
 
 function operate(first, second, operator) {
   switch (true) {
@@ -43,10 +46,17 @@ function divide(x, y) {
 function numListener(numNodeList) {
   numNodeList.forEach((numBtn) => {
     numBtn.addEventListener("click", () => {
-      displayScreen.textContent += numBtn.attributes["data-digit"].value;
-      console.log(numBtn.attributes["data-digit"].value);
+        displayScreen.textContent += numBtn.attributes["data-digit"].value;
     });
   });
+}
+
+function oprListener(operateNodeList) {
+    operateNodeList.forEach((oprBtn) => {
+        oprBtn.addEventListener('click', () => {
+            console.log(oprBtn.attributes["data-operation"].value);
+        })
+    })
 }
 // Simulates a calculator that is able to do multiple operations with multiple numbers
 // Inputs only taken from prompt()s, outputs result to the console
