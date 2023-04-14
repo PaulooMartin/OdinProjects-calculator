@@ -12,6 +12,8 @@ operatorBtns.forEach(oprListener);
 eraseListener();
 decimalListener();
 
+let equaled = false;
+
 function operate(first, second, operator) {
   switch (true) {
     case operator === "+":
@@ -51,14 +53,19 @@ function numListener(numBtn) {
   numBtn.addEventListener("click", () => {
     lettersHandler();
     let digit = numBtn.attributes["data-digit"].value;
-    if (displayScreen.textContent == "0") displayScreen.textContent = digit;
+    if (displayScreen.textContent == "0" || equaled == true) {
+      displayScreen.textContent = digit;
+      equaled = false;
+    }
     else displayScreen.textContent += digit;
   });
 }
 
 function oprListener(oprBtn) {
   oprBtn.addEventListener("click", () => {
+    equaled = false;
     lettersHandler();
+
     let operation = oprBtn.attributes["data-operation"].value;
     let displayLength = displayScreen.textContent.length;
     let displayDigits = displayScreen.textContent;
@@ -88,6 +95,11 @@ function oprListener(oprBtn) {
 function eraseListener() {
   eraseBtn.addEventListener("click", () => {
     lettersHandler();
+    if (equaled == true) {
+      displayScreen.textContent = "";
+      equaled = false;
+      return;
+    }
     displayScreen.textContent = displayScreen.textContent.slice(
       0,
       displayScreen.textContent.length - 1
@@ -106,8 +118,9 @@ function decimalListener() {
       case check == true:
         return;
 
-      case digits == 0:
+      case digits == 0 || equaled == true:
         displayScreen.textContent = `0${decimal}`;
+        equaled = false;
         break;
 
       default:
@@ -129,6 +142,7 @@ function equalOperate() {
   );
   numbers = [];
   operators = [];
+  equaled = true;
 
   displayScreen.textContent = finalResult;
   return;
