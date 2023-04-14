@@ -4,11 +4,13 @@ let operators = [];
 const displayScreen = document.querySelector(".display-screen");
 const digitBtns = document.querySelectorAll(".number");
 const operatorBtns = document.querySelectorAll(".operator");
-const eraseBtn = document.querySelector(".erase");
+const eraseBtn = document.querySelector("button[data-operation = 'erase']");
+const decimalBtn = document.querySelector("button[data-digit = '.']");
 
 numListener(digitBtns);
 oprListener(operatorBtns);
 eraseListener(eraseBtn);
+decimalListener(decimalBtn);
 
 function operate(first, second, operator) {
   switch (true) {
@@ -63,12 +65,32 @@ function oprListener(operateNodeList) {
   });
 }
 
-function eraseListener(eraseBtn) {
-  eraseBtn.addEventListener("click", () => {
+function eraseListener(esrBtn) {
+  esrBtn.addEventListener("click", () => {
     displayScreen.textContent = displayScreen.textContent.slice(
       0,
       displayScreen.textContent.length - 1
     );
+  });
+}
+
+function decimalListener(dcmlBtn) {
+  dcmlBtn.addEventListener("click", () => {
+    let check = displayScreen.textContent.includes(".");
+    let digits = displayScreen.textContent.length;
+    let decimal = dcmlBtn.attributes["data-digit"].value;
+
+    switch (true) {
+      case check == true:
+        return;
+
+      case digits >= 1:
+        displayScreen.textContent += decimal;
+        break;
+
+      default:
+        displayScreen.textContent = `0${decimal}`;
+    }
   });
 }
 // Simulates a calculator that is able to do multiple operations with multiple numbers
