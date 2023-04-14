@@ -56,8 +56,7 @@ function numListener(numBtn) {
     if (displayScreen.textContent == "0" || equaled == true) {
       displayScreen.textContent = digit;
       equaled = false;
-    }
-    else displayScreen.textContent += digit;
+    } else displayScreen.textContent += digit;
   });
 }
 
@@ -134,6 +133,7 @@ function equalOperate() {
     displayScreen.textContent = numbers[0];
     numbers = [];
     operators = [];
+    equaled = true;
     return;
   }
 
