@@ -64,6 +64,9 @@ function oprListener(oprBtn) {
 
     switch (true) {
       case displayLength == 0:
+        operators.pop()
+        operators.push(operation)
+        if (operation === "=") equalOperate();
         return;
 
       case check.test(displayDigits):
