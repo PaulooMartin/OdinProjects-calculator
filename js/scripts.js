@@ -7,7 +7,7 @@ const operatorBtns = document.querySelectorAll(".operator");
 const eraseBtn = document.querySelector("button[data-operation = 'erase']");
 const decimalBtn = document.querySelector("button[data-digit = '.']");
 
-digitBtns.forEach(numListener)
+digitBtns.forEach(numListener);
 operatorBtns.forEach(oprListener);
 eraseListener();
 decimalListener();
@@ -48,11 +48,11 @@ function divide(x, y) {
 }
 
 function numListener(numBtn) {
-    numBtn.addEventListener("click", () => {
-      let digit = numBtn.attributes["data-digit"].value;
-      if (displayScreen.textContent == "0") displayScreen.textContent = digit;
-      else displayScreen.textContent += digit;
-    });
+  numBtn.addEventListener("click", () => {
+    let digit = numBtn.attributes["data-digit"].value;
+    if (displayScreen.textContent == "0") displayScreen.textContent = digit;
+    else displayScreen.textContent += digit;
+  });
 }
 
 function oprListener(oprBtn) {
@@ -101,13 +101,20 @@ function decimalListener() {
         displayScreen.textContent = `0${decimal}`;
         break;
 
-        default:
-          displayScreen.textContent += decimal;
-        }
+      default:
+        displayScreen.textContent += decimal;
+    }
   });
 }
 
-function equalOperate(){
+function equalOperate() {
+  if (numbers.length === 1) {
+    displayScreen.textContent = numbers[0];
+    numbers = [];
+    operators = [];
+    return;
+  }
+
   let finalResult = numbers.reduce((result, currentNumber, currentIndex) =>
     operate(result, currentNumber, operators[currentIndex - 1])
   );
