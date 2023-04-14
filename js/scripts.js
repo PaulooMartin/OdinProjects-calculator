@@ -8,7 +8,7 @@ const eraseBtn = document.querySelector(".erase");
 
 numListener(digitBtns);
 oprListener(operatorBtns);
-eraseListener(eraseBtn)
+eraseListener(eraseBtn);
 
 function operate(first, second, operator) {
   switch (true) {
@@ -48,7 +48,9 @@ function divide(x, y) {
 function numListener(numNodeList) {
   numNodeList.forEach((numBtn) => {
     numBtn.addEventListener("click", () => {
-      displayScreen.textContent += numBtn.attributes["data-digit"].value;
+      if (displayScreen.textContent == "0")
+        displayScreen.textContent = numBtn.attributes["data-digit"].value;
+      else displayScreen.textContent += numBtn.attributes["data-digit"].value;
     });
   });
 }
@@ -62,7 +64,12 @@ function oprListener(operateNodeList) {
 }
 
 function eraseListener(eraseBtn) {
-  eraseBtn.addEventListener("click", () => displayScreen.textContent = displayScreen.textContent.slice(0,displayScreen.textContent.length - 1));
+  eraseBtn.addEventListener("click", () => {
+    displayScreen.textContent = displayScreen.textContent.slice(
+      0,
+      displayScreen.textContent.length - 1
+    );
+  });
 }
 // Simulates a calculator that is able to do multiple operations with multiple numbers
 // Inputs only taken from prompt()s, outputs result to the console
