@@ -73,6 +73,7 @@ function oprListener(oprBtn) {
         numbers.push(+displayDigits);
         operators.push(operation);
         displayScreen.textContent = "";
+        if (operation === "=") equalOperate();
     }
   });
 }
@@ -104,6 +105,17 @@ function decimalListener() {
           displayScreen.textContent += decimal;
         }
   });
+}
+
+function equalOperate(){
+  let finalResult = numbers.reduce((result, currentNumber, currentIndex) =>
+    operate(result, currentNumber, operators[currentIndex - 1])
+  );
+  numbers = [];
+  operators = [];
+
+  displayScreen.textContent = finalResult;
+  return;
 }
 // Simulates a calculator that is able to do multiple operations with multiple numbers
 // Inputs only taken from prompt()s, outputs result to the console
