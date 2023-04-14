@@ -8,7 +8,7 @@ const eraseBtn = document.querySelector("button[data-operation = 'erase']");
 const decimalBtn = document.querySelector("button[data-digit = '.']");
 
 numListener();
-oprListener();
+operatorBtns.forEach(oprListener);
 eraseListener();
 decimalListener();
 
@@ -57,11 +57,25 @@ function numListener() {
   });
 }
 
-function oprListener() {
-  operatorBtns.forEach((oprBtn) => {
-    oprBtn.addEventListener("click", () => {
-      console.log(oprBtn.attributes["data-operation"].value);
-    });
+function oprListener(oprBtn) {
+  oprBtn.addEventListener("click", () => {
+    let operation = oprBtn.attributes["data-operation"].value;
+    let displayLength = displayScreen.textContent.length;
+    let displayDigits = displayScreen.textContent;
+    const check = /\d\.$/;
+
+    switch (true) {
+      case displayLength == 0:
+        return;
+
+      case check.test(displayDigits):
+        return alert("ILLEGAL!");
+
+      default:
+        numbers.push(+displayDigits);
+        operators.push(operation);
+        displayScreen.textContent = "";
+    }
   });
 }
 
