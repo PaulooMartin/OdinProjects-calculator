@@ -7,7 +7,7 @@ const operatorBtns = document.querySelectorAll(".operator");
 const eraseBtn = document.querySelector("button[data-operation = 'erase']");
 const decimalBtn = document.querySelector("button[data-digit = '.']");
 
-numListener();
+digitBtns.forEach(numListener)
 operatorBtns.forEach(oprListener);
 eraseListener();
 decimalListener();
@@ -47,14 +47,12 @@ function divide(x, y) {
   return x / y;
 }
 
-function numListener() {
-  digitBtns.forEach((numBtn) => {
+function numListener(numBtn) {
     numBtn.addEventListener("click", () => {
-      if (displayScreen.textContent == "0")
-        displayScreen.textContent = numBtn.attributes["data-digit"].value;
-      else displayScreen.textContent += numBtn.attributes["data-digit"].value;
+      let digit = numBtn.attributes["data-digit"].value;
+      if (displayScreen.textContent == "0") displayScreen.textContent = digit;
+      else displayScreen.textContent += digit;
     });
-  });
 }
 
 function oprListener(oprBtn) {
@@ -98,13 +96,13 @@ function decimalListener() {
       case check == true:
         return;
 
-      case digits >= 1:
-        displayScreen.textContent += decimal;
+      case digits == 0:
+        displayScreen.textContent = `0${decimal}`;
         break;
 
-      default:
-        displayScreen.textContent = `0${decimal}`;
-    }
+        default:
+          displayScreen.textContent += decimal;
+        }
   });
 }
 // Simulates a calculator that is able to do multiple operations with multiple numbers
