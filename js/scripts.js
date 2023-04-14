@@ -49,6 +49,7 @@ function divide(x, y) {
 
 function numListener(numBtn) {
   numBtn.addEventListener("click", () => {
+    lettersHandler();
     let digit = numBtn.attributes["data-digit"].value;
     if (displayScreen.textContent == "0") displayScreen.textContent = digit;
     else displayScreen.textContent += digit;
@@ -57,6 +58,7 @@ function numListener(numBtn) {
 
 function oprListener(oprBtn) {
   oprBtn.addEventListener("click", () => {
+    lettersHandler();
     let operation = oprBtn.attributes["data-operation"].value;
     let displayLength = displayScreen.textContent.length;
     let displayDigits = displayScreen.textContent;
@@ -64,9 +66,11 @@ function oprListener(oprBtn) {
 
     switch (true) {
       case displayLength == 0:
-        operators.pop()
-        operators.push(operation)
-        if (operation === "=") equalOperate();
+        if (numbers.length) {
+          operators.pop();
+          operators.push(operation);
+          if (operation === "=") equalOperate();
+        }
         return;
 
       case check.test(displayDigits):
@@ -83,6 +87,7 @@ function oprListener(oprBtn) {
 
 function eraseListener() {
   eraseBtn.addEventListener("click", () => {
+    lettersHandler();
     displayScreen.textContent = displayScreen.textContent.slice(
       0,
       displayScreen.textContent.length - 1
@@ -92,6 +97,7 @@ function eraseListener() {
 
 function decimalListener() {
   decimalBtn.addEventListener("click", () => {
+    lettersHandler();
     let check = displayScreen.textContent.includes(".");
     let digits = displayScreen.textContent.length;
     let decimal = decimalBtn.attributes["data-digit"].value;
@@ -125,6 +131,12 @@ function equalOperate() {
   operators = [];
 
   displayScreen.textContent = finalResult;
+  return;
+}
+
+function lettersHandler() {
+  let check = /[a-zA-Z]/g;
+  if (check.test(displayScreen.textContent)) displayScreen.textContent = "";
   return;
 }
 // Simulates a calculator that is able to do multiple operations with multiple numbers
