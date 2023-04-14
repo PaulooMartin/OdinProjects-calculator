@@ -3,10 +3,12 @@ let operators = [];
 
 const displayScreen = document.querySelector(".display-screen");
 const digitBtns = document.querySelectorAll(".number");
-const operatorBtns = document.querySelectorAll(".operator")
+const operatorBtns = document.querySelectorAll(".operator");
+const eraseBtn = document.querySelector(".erase");
 
 numListener(digitBtns);
 oprListener(operatorBtns);
+eraseListener(eraseBtn)
 
 function operate(first, second, operator) {
   switch (true) {
@@ -46,17 +48,21 @@ function divide(x, y) {
 function numListener(numNodeList) {
   numNodeList.forEach((numBtn) => {
     numBtn.addEventListener("click", () => {
-        displayScreen.textContent += numBtn.attributes["data-digit"].value;
+      displayScreen.textContent += numBtn.attributes["data-digit"].value;
     });
   });
 }
 
 function oprListener(operateNodeList) {
-    operateNodeList.forEach((oprBtn) => {
-        oprBtn.addEventListener('click', () => {
-            console.log(oprBtn.attributes["data-operation"].value);
-        })
-    })
+  operateNodeList.forEach((oprBtn) => {
+    oprBtn.addEventListener("click", () => {
+      console.log(oprBtn.attributes["data-operation"].value);
+    });
+  });
+}
+
+function eraseListener(eraseBtn) {
+  eraseBtn.addEventListener("click", () => displayScreen.textContent = displayScreen.textContent.slice(0,displayScreen.textContent.length - 1));
 }
 // Simulates a calculator that is able to do multiple operations with multiple numbers
 // Inputs only taken from prompt()s, outputs result to the console
