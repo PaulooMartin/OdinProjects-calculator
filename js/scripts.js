@@ -7,10 +7,10 @@ const operatorBtns = document.querySelectorAll(".operator");
 const eraseBtn = document.querySelector("button[data-operation = 'erase']");
 const decimalBtn = document.querySelector("button[data-digit = '.']");
 
-numListener(digitBtns);
-oprListener(operatorBtns);
-eraseListener(eraseBtn);
-decimalListener(decimalBtn);
+numListener();
+oprListener();
+eraseListener();
+decimalListener();
 
 function operate(first, second, operator) {
   switch (true) {
@@ -47,8 +47,8 @@ function divide(x, y) {
   return x / y;
 }
 
-function numListener(numNodeList) {
-  numNodeList.forEach((numBtn) => {
+function numListener() {
+  digitBtns.forEach((numBtn) => {
     numBtn.addEventListener("click", () => {
       if (displayScreen.textContent == "0")
         displayScreen.textContent = numBtn.attributes["data-digit"].value;
@@ -57,16 +57,16 @@ function numListener(numNodeList) {
   });
 }
 
-function oprListener(operateNodeList) {
-  operateNodeList.forEach((oprBtn) => {
+function oprListener() {
+  operatorBtns.forEach((oprBtn) => {
     oprBtn.addEventListener("click", () => {
       console.log(oprBtn.attributes["data-operation"].value);
     });
   });
 }
 
-function eraseListener(esrBtn) {
-  esrBtn.addEventListener("click", () => {
+function eraseListener() {
+  eraseBtn.addEventListener("click", () => {
     displayScreen.textContent = displayScreen.textContent.slice(
       0,
       displayScreen.textContent.length - 1
@@ -74,11 +74,11 @@ function eraseListener(esrBtn) {
   });
 }
 
-function decimalListener(dcmlBtn) {
-  dcmlBtn.addEventListener("click", () => {
+function decimalListener() {
+  decimalBtn.addEventListener("click", () => {
     let check = displayScreen.textContent.includes(".");
     let digits = displayScreen.textContent.length;
-    let decimal = dcmlBtn.attributes["data-digit"].value;
+    let decimal = decimalBtn.attributes["data-digit"].value;
 
     switch (true) {
       case check == true:
