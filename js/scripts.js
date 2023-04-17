@@ -71,22 +71,24 @@ function oprListener(oprBtn) {
     const check = /\d\.$/;
 
     switch (true) {
+      case check.test(displayDigits):
+        return alert("ILLEGAL!");
+
       case displayLength == 0:
         if (numbers.length) {
           operators.pop();
           operators.push(operation);
-          if (operation === "=") equalOperate();
+          if (operation === "=") operateOnEqual();
         }
         return;
-
-      case check.test(displayDigits):
-        return alert("ILLEGAL!");
 
       default:
         numbers.push(+displayDigits);
         operators.push(operation);
+        // needs clearing of everything if code below is true
+        if (checkDivideByZero() === 1) return alert("NOT ALLOWED!")
         displayScreen.textContent = "";
-        if (operation === "=") equalOperate();
+        if (operation === "=") operateOnEqual();
     }
   });
 }
@@ -128,7 +130,7 @@ function decimalListener() {
   });
 }
 
-function equalOperate() {
+function operateOnEqual() {
   if (numbers.length === 1) {
     displayScreen.textContent = numbers[0];
     numbers = [];
@@ -172,4 +174,9 @@ function TEMP() {
   operators = [];
 
   console.log(finalResult);
+}
+
+function checkDivideByZero() {
+  let AAAA = numbers.length;
+  if (AAAA > 1 && numbers[AAAA - 1] === 0 && operators[AAAA - 2]) return 1;
 }
