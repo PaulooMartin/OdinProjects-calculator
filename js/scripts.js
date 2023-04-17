@@ -151,7 +151,8 @@ function operateOnEqual() {
   operators = [];
   equaled = true;
 
-  displayScreen.textContent = finalResult;
+  if (Number.isInteger(finalResult)) displayScreen.textContent = finalResult;
+  else displayScreen.textContent = finalResult.toFixed(3);
   return;
 }
 
