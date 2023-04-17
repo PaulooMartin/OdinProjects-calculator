@@ -59,6 +59,7 @@ function numListener(numBtn) {
     let digit = numBtn.attributes["data-digit"].value;
     if (displayScreen.textContent == "0" || equaled == true) {
       displayScreen.textContent = digit;
+      displayHistory.textContent = "";
       equaled = false;
     } else displayScreen.textContent += digit;
   });
