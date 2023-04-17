@@ -8,31 +8,39 @@
     <title>Calculator</title>
   </head>
   <body>
-    <div class="display-box">
-      <p class="display-screen"></p>
-      <p class="history"></p>
-    </div>
-    <div class="numbers">
-      <button data-digit = "0" class="number">0</button>
-      <button data-digit = "1" class="number">1</button>
-      <button data-digit = "2" class="number">2</button>
-      <button data-digit = "3" class="number">3</button>
-      <button data-digit = "4" class="number">4</button>
-      <button data-digit = "5" class="number">5</button>
-      <button data-digit = "6" class="number">6</button>
-      <button data-digit = "7" class="number">7</button>
-      <button data-digit = "8" class="number">8</button>
-      <button data-digit = "9" class="number">9</button>
-      <button data-digit = "." class="decimal">.</button>
-    </div>
-    <div class="operators">
-      <button data-operation = "+" class="operator">+</button>
-      <button data-operation = "-" class="operator">-</button>
-      <button data-operation = "*" class="operator">x</button>
-      <button data-operation = "/" class="operator">/</button>
-      <button data-operation = "=" class="operator">=</button>
-      <button data-operation = "erase" class="erase">Backspace</button>
-      <button data-operation = "clear" class="clear">C</button>
+    <div class="background">
+        <p class="history"></p>
+        <p class="display-screen">0</p>
+      <div class="buttons-container">
+        <div class="row">
+          <button data-operation="clear" class="clear">C</button>
+          <button data-operation="erase" class="erase">Erase</button>
+          <button data-operation="/" class="operator">/</button>
+        </div>
+        <div class="row">
+          <button data-digit="7" class="number">7</button>
+          <button data-digit="8" class="number">8</button>
+          <button data-digit="9" class="number">9</button>
+          <button data-operation="*" class="operator">x</button>
+        </div>
+        <div class="row">
+          <button data-digit="4" class="number">4</button>
+          <button data-digit="5" class="number">5</button>
+          <button data-digit="6" class="number">6</button>
+          <button data-operation="-" class="operator">-</button>
+        </div>
+        <div class="row">
+          <button data-digit="1" class="number">1</button>
+          <button data-digit="2" class="number">2</button>
+          <button data-digit="3" class="number">3</button>
+          <button data-operation="+" class="operator">+</button>
+        </div>
+        <div class="row">
+          <button data-digit="0" class="number zero">0</button>
+          <button data-digit="." class="decimal">.</button>
+          <button data-operation="=" class="operator">=</button>
+        </div>
+      </div>
     </div>
     <script src="./js/scripts.js"></script>
   </body>
