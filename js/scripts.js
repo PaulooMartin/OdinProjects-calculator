@@ -2,6 +2,7 @@ let numbers = [];
 let operators = [];
 
 const displayScreen = document.querySelector(".display-screen");
+const displayHistory = document.querySelector(".history");
 const digitBtns = document.querySelectorAll(".number");
 const decimalBtn = document.querySelector("button[data-digit = '.']");
 const operatorBtns = document.querySelectorAll(".operator");
@@ -192,4 +193,16 @@ function clear() {
   operators = [];
   equaled = false;
   displayScreen.textContent = "CLEARED";
+}
+
+function screenHistory(number = NaN, operator, changeOperator = false){
+  let historyLength = displayHistory.textContent.length
+  
+  if (changeOperator == false){
+    displayHistory.textContent = displayHistory.textContent.concat(number, " ", operator, " ");
+  }
+  else if (changeOperator == true){
+    displayHistory.textContent = displayHistory.textContent.slice(0, historyLength - 2);
+    displayHistory.textContent = displayHistory.textContent.concat(operator, " ");
+  }
 }
