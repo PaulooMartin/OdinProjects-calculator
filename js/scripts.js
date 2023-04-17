@@ -3,16 +3,17 @@ let operators = [];
 
 const displayScreen = document.querySelector(".display-screen");
 const digitBtns = document.querySelectorAll(".number");
-const operatorBtns = document.querySelectorAll(".operator");
-const eraseBtn = document.querySelector("button[data-operation = 'erase']");
 const decimalBtn = document.querySelector("button[data-digit = '.']");
+const operatorBtns = document.querySelectorAll(".operator");
 const clearBtn = document.querySelector("button[data-operation = 'clear']")
+const eraseBtn = document.querySelector("button[data-operation = 'erase']");
 
 digitBtns.forEach(numListener);
-operatorBtns.forEach(oprListener);
-eraseListener();
 decimalListener();
+
+operatorBtns.forEach(oprListener);
 clearBtn.addEventListener('click', clear)
+eraseListener();
 
 let equaled = false;
 
@@ -181,8 +182,8 @@ function TEMP() {
 }
 
 function checkDivideByZero() {
-  let AAAA = numbers.length;
-  if (AAAA > 1 && numbers[AAAA - 1] === 0 && operators[AAAA - 2]) return 1;
+  let numbersLength = numbers.length;
+  if (numbersLength > 1 && numbers[numbersLength - 1] === 0 && operators[numbersLength - 2]) return 1;
 }
 
 function clear() {
