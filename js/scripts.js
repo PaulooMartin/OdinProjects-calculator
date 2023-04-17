@@ -82,6 +82,7 @@ function oprListener(oprBtn) {
         if (numbers.length) {
           operators.pop();
           operators.push(operation);
+          screenHistory(NaN, operation, true);
           if (operation === "=") operateOnEqual();
         }
         return;
@@ -89,6 +90,7 @@ function oprListener(oprBtn) {
       default:
         numbers.push(+displayDigits);
         operators.push(operation);
+        screenHistory(+displayDigits, operation);
         if (checkDivideByZero() === 1) {
           clear()
           return alert("NOT ALLOWED! CLEARED EVERYTHING :>");
@@ -193,11 +195,12 @@ function clear() {
   operators = [];
   equaled = false;
   displayScreen.textContent = "CLEARED";
+  displayHistory.textContent = "";
 }
 
 function screenHistory(number = NaN, operator, changeOperator = false){
   let historyLength = displayHistory.textContent.length
-  
+
   if (changeOperator == false){
     displayHistory.textContent = displayHistory.textContent.concat(number, " ", operator, " ");
   }
