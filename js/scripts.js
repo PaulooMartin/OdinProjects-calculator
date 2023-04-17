@@ -6,11 +6,13 @@ const digitBtns = document.querySelectorAll(".number");
 const operatorBtns = document.querySelectorAll(".operator");
 const eraseBtn = document.querySelector("button[data-operation = 'erase']");
 const decimalBtn = document.querySelector("button[data-digit = '.']");
+const clearBtn = document.querySelector("button[data-operation = 'clear']")
 
 digitBtns.forEach(numListener);
 operatorBtns.forEach(oprListener);
 eraseListener();
 decimalListener();
+clearBtn.addEventListener('click', clear)
 
 let equaled = false;
 
@@ -72,7 +74,7 @@ function oprListener(oprBtn) {
 
     switch (true) {
       case check.test(displayDigits):
-        return alert("ILLEGAL!");
+        return alert("ILLEGAL! Try again");
 
       case displayLength == 0:
         if (numbers.length) {
@@ -85,8 +87,10 @@ function oprListener(oprBtn) {
       default:
         numbers.push(+displayDigits);
         operators.push(operation);
-        // needs clearing of everything if code below is true
-        if (checkDivideByZero() === 1) return alert("NOT ALLOWED!")
+        if (checkDivideByZero() === 1) {
+          clear()
+          return alert("NOT ALLOWED! CLEARED EVERYTHING :>");
+        }
         displayScreen.textContent = "";
         if (operation === "=") operateOnEqual();
     }
@@ -179,4 +183,11 @@ function TEMP() {
 function checkDivideByZero() {
   let AAAA = numbers.length;
   if (AAAA > 1 && numbers[AAAA - 1] === 0 && operators[AAAA - 2]) return 1;
+}
+
+function clear() {
+  numbers = [];
+  operators = [];
+  equaled = false;
+  displayScreen.textContent = "CLEARED";
 }
