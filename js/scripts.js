@@ -68,11 +68,12 @@ function numListener(numBtn) {
 function oprListener(oprBtn) {
   oprBtn.addEventListener("click", () => {
     equaled = false;
-    lettersHandler();
+    lettersHandler(true);
 
     let operation = oprBtn.attributes["data-operation"].value;
     let displayLength = displayScreen.textContent.length;
     let displayDigits = displayScreen.textContent;
+    console.log(displayDigits)
     const check = /\d\.$/;
 
     switch (true) {
@@ -160,9 +161,16 @@ function operateOnEqual() {
   return;
 }
 
-function lettersHandler() {
+function lettersHandler(fromOperation = false) {
   let check = /[a-zA-Z]/g;
-  if (check.test(displayScreen.textContent)) displayScreen.textContent = "";
+  let check2 = /\de\+/g;
+  if (!fromOperation){
+    if (check.test(displayScreen.textContent)) displayScreen.textContent = "";
+  } else {
+    if (check2.test(displayScreen.textContent)) return;
+    else if (check.test(displayScreen.textContent))
+      displayScreen.textContent = "";
+  }
   return;
 }
 // Simulates a calculator that is able to do multiple operations with multiple numbers
@@ -201,6 +209,14 @@ function clear() {
 
 function screenHistory(number = NaN, operator, changeOperator = false){
   let historyLength = displayHistory.textContent.length
+
+  // when it gets too long
+  if (historyLength > 20) {
+    displayHistory.textContent = displayHistory.textContent.slice(20);
+    displayHistory.textContent = "..." + displayHistory.textContent;
+  }
+
+  historyLength = displayHistory.textContent.length;
 
   if (changeOperator == false){
     displayHistory.textContent = displayHistory.textContent.concat(number, " ", operator, " ");
