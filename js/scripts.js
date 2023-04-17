@@ -107,6 +107,7 @@ function eraseListener() {
   eraseBtn.addEventListener("click", () => {
     lettersHandler();
     if (equaled == true) {
+      displayHistory.textContent = "";
       displayScreen.textContent = "";
       equaled = false;
       return;
